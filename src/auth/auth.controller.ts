@@ -5,6 +5,7 @@ import { IAuth } from 'src/auth/auth.interface';
 import { AuthService } from 'src/auth/auth.service';
 import { IUser } from 'src/users/users.interface';
 import { response } from 'src/utils';
+import ChangePasswordDto from './dto/changePassword.dto';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
 
@@ -20,6 +21,15 @@ export class AuthController {
     res.setHeader('Set-Cookie', [data.cookie]);
     res.setHeader('token', data.token);
     res.json({ data: data.data, success: true, message: 'login successful'});
+  }
+
+  @Post('change-password')
+  @HttpCode(200)
+  async changePassword(@Body() auth: ChangePasswordDto, @Res() res: Response) {
+    const data = await this.authService.changePassword(auth);
+    res.setHeader('Set-Cookie', [data.cookie]);
+    res.setHeader('token', data.token);
+    res.json({ data: data.data, success: true, message: 'Password change successful'});
   }
 
   @Post('signup')

@@ -7,6 +7,7 @@ import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
 import { sign } from 'jsonwebtoken';
 import { InjectModel } from '@nestjs/mongoose';
+import ChangePasswordDto from './dto/changePassword.dto';
 
 @Injectable()
 export class AuthService {
@@ -31,6 +32,22 @@ export class AuthService {
     if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     const passwordCheck = await compare(auth.password, user.password);
     if (!passwordCheck) throw new HttpException('Incorrect login credentials', HttpStatus.CONFLICT);
+    const tokenData = this.createToken(user);
+    const cookie = this.createCookie(tokenData);
+
+    return { token: tokenData.token, cookie, data: user };
+    
+  }
+
+  public async changePassword(auth: ChangePasswordDto): Promise<authResponse<IUser>> {
+    if (isEmpty(auth)) throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+    const user = await this.userModel.findOne({ email: auth.email });
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    const passwordCheck = await compare(auth.password, user.password);
+    if (!passwordCheck) throw new HttpException('Incorrect old password', HttpStatus.CONFLICT);
+    const hashedNewPassword = await hash(auth.newPassword, 10);
+    user.password = hashedNewPassword;
+    user.save();
     const tokenData = this.createToken(user);
     const cookie = this.createCookie(tokenData);
 

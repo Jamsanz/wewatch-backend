@@ -12,3 +12,7 @@ export interface IUser extends IAuth {
   role: string;
   pushToken?: string;
 }
+
+export interface IPasswordUpdate extends IAuth {
+  newPassword: string;
+}

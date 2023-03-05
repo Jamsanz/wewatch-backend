@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { IUser } from 'src/users/users.interface';
 import { isEmpty } from 'src/utils';
+import UpdateUserDto from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -23,7 +24,7 @@ export class UsersService {
     return await this.userModel.create(user);
   }
 
-  public async update(id: string, data: IUser): Promise<IUser> {
+  public async update(id: string, data: UpdateUserDto): Promise<IUser> {
     if (isEmpty(id) || isEmpty(data))
     throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     await this.userModel.findByIdAndUpdate(id, data);

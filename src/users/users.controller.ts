@@ -15,6 +15,8 @@ import { RequestWithUser } from 'src/auth/auth.interface';
 import { IUser } from 'src/users/users.interface';
 import { UsersService } from 'src/users/users.service';
 import { response } from 'src/utils';
+import CreateUserDto from './dto/create-user.dto';
+import UpdateUserDto from './dto/update-user.dto';
 
 @ApiTags('users')
 @ApiBearerAuth()
@@ -39,13 +41,8 @@ export class UsersController {
     return req.user;
   }
 
-  @Get('/region')
-  async getRegion() {
-    return await this.usersService.getRegionTokens('Zaria');
-  }
-
   @Post()
-  public async createUser(@Body() user: IUser): Promise<response<IUser>> {
+  public async createUser(@Body() user: CreateUserDto): Promise<response<IUser>> {
     const data = await this.usersService.create(user);
     return { data, success: true, message: 'created successfully' };
   }
@@ -53,10 +50,10 @@ export class UsersController {
   @Patch(':id')
   public async updateUser(
     @Param('id') id: string,
-    @Body() user: IUser,
+    @Body() user: UpdateUserDto,
   ): Promise<response<IUser>> {
     const data = await this.usersService.update(id, user);
-    return { data, success: true, message: 'updated successfully' };
+    return { data, success: true, message: 'Updated successfully' };
   }
 
   @Put(':id/push-token')
