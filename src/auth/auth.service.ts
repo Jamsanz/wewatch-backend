@@ -8,6 +8,8 @@ import { SignUpDto } from './dto/signup.dto';
 import { sign } from 'jsonwebtoken';
 import { InjectModel } from '@nestjs/mongoose';
 import ChangePasswordDto from './dto/changePassword.dto';
+import { config } from 'dotenv';
+config();
 
 @Injectable()
 export class AuthService {
