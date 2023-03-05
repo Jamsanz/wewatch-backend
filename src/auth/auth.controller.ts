@@ -1,5 +1,6 @@
 import { Body, Controller, HttpCode, Post, Res } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
 import { IAuth } from 'src/auth/auth.interface';
 import { AuthService } from 'src/auth/auth.service';
 import { IUser } from 'src/users/users.interface';
@@ -14,7 +15,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(200)
-  async login(@Body() auth: LoginDto, @Res() res) {
+  async login(@Body() auth: LoginDto, @Res() res: Response) {
     const data = await this.authService.login(auth);
     res.setHeader('Set-Cookie', [data.cookie]);
     res.setHeader('token', data.token);

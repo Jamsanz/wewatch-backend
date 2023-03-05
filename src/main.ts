@@ -7,15 +7,16 @@ config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-
   const config = new DocumentBuilder()
-    .setTitle('My Boilerplate REST API (NESTJS)')
+    .setTitle('weWatch REST API')
     .setDescription(
-      "This is a boilerplate API I personally made to ease scaffolding NEST JS back with Mongoose ORM This API has authentication and authorization, and users API middleware config",
+      "This is the weWatch API made with NEST JS and Mongoose ORM. This API has authentication and authorization, and users API middleware config",
     )
     .setVersion('1.0')
     .addTag('auth')
     .addTag('users')
+    .addTag('issues')
+    .addTag('notifications')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

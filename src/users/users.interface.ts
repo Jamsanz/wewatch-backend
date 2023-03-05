@@ -1,11 +1,14 @@
 import { IAuth } from '../auth/auth.interface';
 
 export interface IUser extends IAuth {
+  _id?: string;
   firstName: string;
   lastName: string;
-  address: string;
   phone: string;
-  password: string;
-  profileImg: string;
-  _id?: number;
+  state: string;
+  lga: string;
+  ward?: string;
+  pollingUnit: string;
+  role: string;
+  pushToken?: string;
 }

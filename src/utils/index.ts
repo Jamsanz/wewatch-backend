@@ -29,7 +29,7 @@ export interface response<T> {
 }
 
 export interface ITokenData {
-  expiresIn: number;
+  expiresIn: string | number;
   token: string;
 }
 

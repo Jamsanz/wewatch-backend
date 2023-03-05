@@ -17,11 +17,14 @@ export class SignUpDto implements IUser {
 
   @ApiProperty()
   @IsString()
-  address: string;
+  state: string;
 
   @ApiProperty()
   @IsString()
-  profileImg: string;
+  ward: string;
+    
+  @IsString()
+  lga: string;
   
   @ApiProperty()
   @IsEmail()
@@ -30,4 +33,12 @@ export class SignUpDto implements IUser {
   @ApiProperty()
   @IsString()
   password: string;
+
+  @ApiProperty()
+  @IsString()
+  role: string;
+
+  @ApiProperty({examples: ['18-23-001']})
+  @IsString()
+  pollingUnit: string;
 }
