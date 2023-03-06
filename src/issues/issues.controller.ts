@@ -15,7 +15,7 @@ export class IssuesController {
 
   @Post()
   async create(@Body() createIssueDto: CreateIssueDto, @Req() req: RequestWithUser) {
-    this.notificationService.sendNotification({title: createIssueDto.title, message: req.user.state, region: req.user.lga})
+    this.notificationService.sendNotification({title: createIssueDto.title, message: req.user.state, region: req.user.state})
     return this.issuesService.create({
       ...createIssueDto,
       state: req.user.state,

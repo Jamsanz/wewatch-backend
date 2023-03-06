@@ -44,7 +44,7 @@ export class UsersService {
 
   public async getRegionTokens(region: string) {
     if (isEmpty(region)) throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-    return await this.userModel.find({ lga: region }).select('pushToken');
+    return await this.userModel.find({ state: region }).select('pushToken');
   }
   
 }
