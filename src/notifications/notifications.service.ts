@@ -56,7 +56,7 @@ export class NotificationsService {
       to: pushTokens.map(token => token.pushToken),
       title,
       body: message,
-      data: { message, userIds: pushTokens.map(user => user._id ) },
+      data: { message, userIds: pushTokens.map(user => `${user._id}` ) },
     };
 
     // send messages using Expo
