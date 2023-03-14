@@ -56,7 +56,7 @@ export class NotificationsService {
       to: pushTokens.map(token => token.pushToken),
       title,
       body: message,
-      data: { message, userIds: pushTokens.map(user => `${user._id}` ) },
+      data: { message, userIds: pushTokens.map(user => user._id ) },
     };
 
     // send messages using Expo
@@ -68,8 +68,7 @@ export class NotificationsService {
         tickets.push(...ticketChunk);
         
         messages.data.userIds.map(async (id) => {
-          let res = await this.createNotification({ title: messages.title, body: messages.body, userId: id });
-          console.log(res);
+         await this.createNotification({ title: messages.title, body: messages.body, userId: id });
         })
 
       } catch (error) {
