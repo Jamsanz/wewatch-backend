@@ -68,7 +68,7 @@ export class NotificationsService {
         tickets.push(...ticketChunk);
         
         messages.data.userIds.map(async (id) => {
-         await this.createNotification({ title: messages.title, body: messages.body, userId: id });
+         let res = await this.createNotification({ title: messages.title, body: messages.body, userId: id });
         })
 
       } catch (error) {
