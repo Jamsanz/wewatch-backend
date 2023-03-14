@@ -50,10 +50,10 @@ export class NotificationsService {
     const expo = new Expo();
 
     let pushTokens = await this.usersService.getRegionTokens(region);
-
+    console.log(pushTokens);
     // create push messages
     const messages = {
-      to: pushTokens.map(token => token.pushToken),
+      to: pushTokens.map(token => token.pushToken).filter(token => token),
       title,
       body: message,
       data: { message, userIds: pushTokens.map(user => user._id ) },
