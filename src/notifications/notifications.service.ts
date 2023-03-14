@@ -53,7 +53,7 @@ export class NotificationsService {
 
     // create push messages
     const messages = {
-      to: pushTokens.map(token => token.pushToken).filter(token => token !== undefined),
+      to: pushTokens.map(token => token.pushToken),
       title,
       body: message,
       data: { message, userIds: pushTokens.map(user => user._id ) },
